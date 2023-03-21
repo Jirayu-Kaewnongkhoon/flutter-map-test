@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Map Server</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+</head>
+<body>
+    <div id="map" style="height: 100vh;"></div>
+
+    <script>
+        // ตั้งค่าแผนที่
+        const lat = 14.280577795;
+        const lng = 101.31266547000001;
+        
+        // var map = L.map('map').setView([lat, lng], 15);
+
+        // // กำหนด Tile Layer
+        // L.tileLayer('http://localhost:3000/{z}/{x}/{y}.png', {
+        //     maxZoom: 19,
+        // }).addTo(map);
+
+
+        var customLayer = L.tileLayer('http://7943-2001-fb1-57-85c7-203c-8aed-f65f-4b37.ap.ngrok.io/{z}/{x}/{y}.png', {
+            attribution: 'Custom Tile',
+        });
+        var mapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map Data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+
+        var map = L.map('map', {
+            center: [lat, lng],
+            zoom: 15,
+            layers: [mapLayer, customLayer] // ให้แสดงทั้ง customLayer และ mapLayer
+        });
+    </script>
+</body>
+</html>
